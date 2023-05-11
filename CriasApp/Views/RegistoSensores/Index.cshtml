@@ -1,0 +1,55 @@
+﻿@model IEnumerable<CriasApp.Models.RegistoSensores>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Sensores</h1>
+
+
+<a asp-action="Create" style="float: right" class="btn btn-primary">
+    @*<a asp-action="Create">Create New</a>*@
+    Nueva
+</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.freCardiaca)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.preSanguinea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.freRespiratoria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.temperatura)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.freCardiaca)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.preSanguinea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.freRespiratoria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.temperatura)
+            </td>
+            <td>
+                    <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.IdSensor">Editar</a>
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.IdSensor">Detalles</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.IdSensor">Borrar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

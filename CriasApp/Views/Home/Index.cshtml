@@ -1,0 +1,181 @@
+﻿@model Usuarios
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Crias Inc.</h1>
+    <br />
+    <h4>Bienvenido</h4>
+</div>
+<br />
+<br />
+<br />
+<br />
+<div class="text-center">
+    <a id="btnLogin" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Iniciar sesión</a>
+    <br />
+    <br />
+    <a id="btnLogin" class="btn btn-primary" data-toggle="modal" data-target="#ModalRegistro">Registrarme</a>
+</div>
+
+
+<!-- Ventana modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">Login</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row" id="divLogin">
+                    <div class="col-md-6">
+                        <form id="frmLogin">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label class="control-label">Usuario</label>
+                                <input asp-for="Usuario" class="form-control" />
+                                <span asp-validation-for="Usuario" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Contraseña" class="control-label"></label>
+                                <input asp-for="Contraseña" class="form-control" type="password"/>
+                                <span asp-validation-for="Contraseña" class="text-danger"></span>
+                            </div>
+                            <div class="form-group" style="display: flex; justify-content: center;">
+                                <button type="button" class="btn btn-primary" onclick="Login(event)">Entrar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ModalRegistro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">Registro</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row" id="divLogin">
+                    <div class="col-md-6">
+                        <form id="frmRegistro" data-ajax="true">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label class="control-label">Usuario</label>
+                                <input asp-for="Usuario" class="form-control" />
+                                <span asp-validation-for="Usuario" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Contraseña" class="control-label"></label>
+                                <input asp-for="Contraseña" class="form-control" type="password"/>
+                                <span asp-validation-for="Contraseña" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Puesto</label>
+                                <select asp-for="Puesto" class="form-control">
+                                    <option>Personal de Control</option>
+                                    <option>Ayudante de Veterinario</option>
+                                    <option>Veterinario</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="display: flex; justify-content: center;">
+                                <button type="button" class="btn btn-primary" onclick="Registrar(event)">Registrar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+
+<style>
+
+    #divLogin {
+        display: flex !important; 
+        justify-content: center !important;
+    }
+
+</style>
+
+
+<script>
+
+    function Login(e) {
+        e.preventDefault();
+
+        var URL = '@Url.Action("LoginValidate","Account")';
+
+        var frmLogin = $('#frmLogin');
+
+        $.ajax({
+            url: URL,
+            type: 'POST',
+            data: frmLogin.serialize(),
+            success: function (response) {
+                console.log('json -> ' + JSON.stringify(response));
+                if(response.success){
+                    window.location.href = response.redirectUrl;
+                }else{
+                    Swal.fire('Login', response.message, 'error').then(function () {
+                       
+                    });
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log('xhr -> ' + xhr.response);
+                Swal.fire('Login', response.message, 'error').then(function () {
+                    window.location.reload(false);
+                });
+            }
+        });
+
+    }
+
+    function Registrar(e){
+        e.preventDefault();
+
+        var URL = '@Url.Action("GuardarUser","Account")';
+
+        var frmRegistro = $('#frmRegistro'); 
+
+        $.ajax({
+            url: URL,
+            type: 'POST', 
+            data: frmRegistro.serialize(), 
+            success: function (response) {
+                console.log('json -> ' + response);
+                Swal.fire('Registro', response.message, 'success').then(function () {
+                    window.location.reload(false);
+                });
+            },
+            error: function (xhr, status, error) {
+                Swal.fire('Registro', response.message, 'error').then(function () {
+                    window.location.reload(false);
+                });
+            }
+        });
+    }
+
+</script>

@@ -1,0 +1,47 @@
+﻿@model CriasApp.Models.RegistoSensores
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Editar</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdSensor" />
+            <div class="form-group">
+                <label asp-for="freCardiaca" class="control-label"></label>
+                <input asp-for="freCardiaca" class="form-control" />
+                <span asp-validation-for="freCardiaca" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="preSanguinea" class="control-label"></label>
+                <input asp-for="preSanguinea" class="form-control" />
+                <span asp-validation-for="preSanguinea" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="freRespiratoria" class="control-label"></label>
+                <input asp-for="freRespiratoria" class="form-control" />
+                <span asp-validation-for="freRespiratoria" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="temperatura" class="control-label"></label>
+                <input asp-for="temperatura" class="form-control" />
+                <span asp-validation-for="temperatura" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Volver a la Lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33627.172
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CriasApp", "CriasApp\CriasApp.csproj", "{9A376448-F990-4401-9122-C400EA1336F3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9A376448-F990-4401-9122-C400EA1336F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A376448-F990-4401-9122-C400EA1336F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A376448-F990-4401-9122-C400EA1336F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A376448-F990-4401-9122-C400EA1336F3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {71D4F481-A71E-4F75-BA58-8216878DDE1D}
+	EndGlobalSection
+EndGlobal

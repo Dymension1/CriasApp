@@ -1,0 +1,61 @@
+﻿@model IEnumerable<CriasApp.Models.RegistroCria>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Crias Inc.</h1>
+
+<a asp-action="Create" style="float: right" class="btn btn-primary">
+    @*<a asp-action="Create">Create New</a>*@
+    Nueva
+</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Peso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Costo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Fecha.ToString("dd/MM/yyyy")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Peso)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Costo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.IdCria">Editar</a>
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.IdCria">Detalles</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.IdCria">Borrar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
